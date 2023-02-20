@@ -1,0 +1,41 @@
+{
+	"name": "Ubuntu",
+	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"features": {
+	  "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
+	  "ghcr.io/devcontainers-contrib/features/kubectx-kubens:1": {},
+	  "ghcr.io/dhoeric/features/google-cloud-cli:1": {},
+	  "ghcr.io/natescherer/devcontainers-custom-features/k9s:1": {},
+	  "ghcr.io/devcontainers-contrib/features/terraform-asdf:2": {},
+	  "ghcr.io/eitsupi/devcontainer-features/jq-likes:1": {},
+	  "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	},
+	"remoteEnv": {
+	  "USE_GKE_GCLOUD_AUTH_PLUGIN": "True"
+	},
+	"postCreateCommand": "echo \"deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main\" | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list && sudo apt-get update && sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin fzf; exit",
+	"customizations": {
+	  "vscode": {
+		"extensions": [
+		  "hashicorp.terraform"
+		]
+	  }
+	},
+	"mounts": [
+	  {
+		"type": "bind",
+		"source": "${localEnv:HOME}/.kube",
+		"target": "/home/vscode/.kube"
+	  },
+	  {
+		"type": "bind",
+		"source": "${localEnv:HOME}/.config/gcloud",
+		"target": "/home/vscode/.config/gcloud"
+	  },
+	  {
+		"type": "bind",
+		"source": "${localEnv:HOME}/.docker",
+		"target": "/home/vscode/.docker"
+	  }
+	]
+  }
