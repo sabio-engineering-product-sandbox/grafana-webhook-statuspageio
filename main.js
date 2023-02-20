@@ -7,6 +7,10 @@ const https = require('https');
 
 app.use(bodyParser.json())
 
+app.get("/health", (req, res) => {
+  res.send("OK")
+})
+
 {
   let users = {}
   process.env.STATUSPAGE_API_USERS.split(',').forEach((value) => {
